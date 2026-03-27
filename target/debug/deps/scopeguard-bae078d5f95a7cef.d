@@ -1,5 +1,0 @@
-/Users/user/Documents/md-lessons/project/vimPractice/target/debug/deps/scopeguard-bae078d5f95a7cef.d: /Users/user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/scopeguard-1.2.0/src/lib.rs
-
-/Users/user/Documents/md-lessons/project/vimPractice/target/debug/deps/libscopeguard-bae078d5f95a7cef.rmeta: /Users/user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/scopeguard-1.2.0/src/lib.rs
-
-/Users/user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/scopeguard-1.2.0/src/lib.rs:
