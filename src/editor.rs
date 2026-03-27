@@ -117,6 +117,51 @@ impl Editor {
         Some(removed)
     }
 
+    pub fn delete_word_forward(&mut self) {
+        let chars = self.current_line_chars();
+        let len = chars.len();
+        if self.cursor_col >= len {
+            return;
+        }
+
+        let start = self.cursor_col;
+        let mut end = start;
+
+        if chars[start] == ' ' {
+            while end < len && chars[end] == ' ' {
+                end += 1;
+            }
+        } else {
+            while end < len && chars[end] != ' ' {
+                end += 1;
+            }
+        }
+
+        self.delete_range_in_line(start, end);
+    }
+
+    pub fn delete_word_backward(&mut self) {
+        if self.cursor_col == 0 {
+            return;
+        }
+
+        let chars = self.current_line_chars();
+        let mut i = self.cursor_col - 1;
+        while i > 0 && chars[i] == ' ' {
+            i -= 1;
+        }
+
+        while i > 0 && chars[i - 1] != ' ' {
+            i -= 1;
+        }
+
+        let start = i;
+        let end = self.cursor_col;
+
+        self.delete_range_in_line(start, end);
+        self.cursor_col = start;
+    }
+
     pub fn apply_command_outcome(&mut self, deleted: Option<(usize, usize, char)>) {
         let success = match &self.challenge {
             Challenge::MoveTo { row, col } => self.cursor_row == *row && self.cursor_col == *col,
@@ -221,5 +266,25 @@ impl Editor {
         } else if self.cursor_col >= len {
             self.cursor_col = len - 1;
         }
+    }
+
+    fn delete_range_in_line(&mut self, start: usize, end: usize) {
+        if start >= end {
+            return;
+        }
+
+        let chars = self.current_line_chars();
+        let end = end.min(chars.len());
+        let start = start.min(end);
+
+        let mut next = String::new();
+        for (idx, ch) in chars.into_iter().enumerate() {
+            if idx < start || idx >= end {
+                next.push(ch);
+            }
+        }
+
+        self.lines[self.cursor_row] = next;
+        self.clamp_cursor_col();
     }
 }
