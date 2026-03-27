@@ -9,10 +9,16 @@ use crossterm::{
 
 use crate::editor::{Challenge, Editor};
 
-pub fn render(stdout: &mut impl Write, editor: &Editor) -> std::io::Result<()> {
+pub fn render(
+    stdout: &mut impl Write,
+    editor: &Editor,
+    status_message: Option<&str>,
+) -> std::io::Result<()> {
     stdout.queue(Clear(ClearType::All))?;
     stdout.queue(MoveTo(0, 0))?;
-    stdout.queue(Print("Use h, l, w, b, j, k, x for Vim training"))?;
+    stdout.queue(Print(
+        "Use h, l, w, b, j, k, x, and d{w|b} for Vim training",
+    ))?;
 
     for (row, line) in editor.lines.iter().enumerate() {
         stdout.queue(MoveTo(0, (row + 2) as u16))?;
@@ -61,6 +67,13 @@ pub fn render(stdout: &mut impl Write, editor: &Editor) -> std::io::Result<()> {
     )))?;
 
     stdout.queue(MoveTo(0, footer_row + 2))?;
+    if let Some(message) = status_message {
+        stdout.queue(Print(message))?;
+    } else {
+        stdout.queue(Print("                      "))?;
+    }
+
+    stdout.queue(MoveTo(0, footer_row + 3))?;
     if editor.show_success {
         stdout.queue(Print("Success!"))?;
     } else {

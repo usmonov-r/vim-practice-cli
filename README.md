@@ -37,6 +37,9 @@ Supported keys:
 - `j` -> move cursor down
 - `k` -> move cursor up
 - `x` -> delete character under cursor
+- `d` -> operator-pending delete (waits for motion)
+  - `dw` -> delete word forward
+  - `db` -> delete word backward
 
 Challenges:
 
@@ -44,6 +47,11 @@ Challenges:
 - `DeleteChar { row, col }`: delete the highlighted character with `x`.
 
 When a challenge is solved, `Success!` appears and a new challenge is generated.
+
+Operator feedback:
+
+- After pressing `d`, the status line shows: `d waiting for motion`
+- Press `w` or `b` to execute the delete, or any other key to cancel.
 
 ## Notes
 

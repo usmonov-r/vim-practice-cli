@@ -10,6 +10,7 @@ pub enum Command {
     Up,
     Delete,
     Quit,
+    DeleteOperator,
 }
 
 pub fn map_key(event: KeyEvent) -> Option<Command> {
@@ -25,6 +26,7 @@ pub fn map_key(event: KeyEvent) -> Option<Command> {
         KeyCode::Char('j') => Some(Command::Down),
         KeyCode::Char('k') => Some(Command::Up),
         KeyCode::Char('x') => Some(Command::Delete),
+        KeyCode::Char('d') => Some(Command::DeleteOperator),
         _ => None,
     }
 }

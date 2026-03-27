@@ -1,1 +1,0 @@
-/Users/user/Documents/md-lessons/project/vimPractice/target/debug/vim_practice: /Users/user/Documents/md-lessons/project/vimPractice/src/commands.rs /Users/user/Documents/md-lessons/project/vimPractice/src/editor.rs /Users/user/Documents/md-lessons/project/vimPractice/src/main.rs /Users/user/Documents/md-lessons/project/vimPractice/src/ui.rs
